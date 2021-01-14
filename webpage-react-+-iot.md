@@ -6,5 +6,15 @@ Taken from [Iotforall](https://www.iotforall.com/is-react-good-choice-iot-projec
 
 Lifecycle methods helps IoT systems as well because each update is well monitored because of the component lifecycle, meaning a change on the temperature sensor will trigger a new cycle.
 
-[https://github.com/webondevices/react-iot](https://github.com/webondevices/react-iot)
+{% embed url="https://github.com/webondevices/react-iot" %}
+
+
+
+For fetching the Github repo using React: ["React doesn't prescribe a specific approach to data fetching, but people commonly use either a library like axios or the `fetch()` API provided by the browser."](https://github.com/vishalrajole/git-repo-list-reactjs)
+
+Igor Tips:
+
+* NodeJS tem ferramenta pra back-end: express, apolo e jQuery \(?\)
+* Fetching = req. async do github API
+* P/ site público portfólio: framework de React \(nest JS, deploy de sites estáticos\)
 
