@@ -12,10 +12,11 @@ description: Personal notes about Embedded Android.
 * SoC = System On A Chip
 * Dalvik = custom build VM for running Android so it doesn't use proprietary material from Oracle \(Java\)
 * Apache Harmony = instead of the official class library, it's a reimplementation of the class lib.
+* ABI = Application Binary Interface, which has the CPU instructions sets, endiannes of memory stores and loads at runtime \(Android is little-endian\), format of executable binaries \(Android uses ELF\)
 
 ### Linux Kernel
 
-Na pasta /boot do linux, é onde o bootloader carrega o kernel. \(vmlinuz\) $ uname -a. Pode haver mais de um kernel, caso um quebre, escolhemos outro que funcione. Lembrando que esse kernel é compressed, então não temos acesso a ele. Para acessar e ver como configurar o kernel, baixamos do site. To know [what is each file in /boot](https://www.linuxquestions.org/questions/linux-newbie-8/%5Bboot%5D-what-do-those-files-do-828407/) . The drivers \(called as modules in Kernel\), which are .c functions that makes interface with the hardware \(CPU and so on\) are located in the /lib/modules folder in Ubuntu.
+On the folder /boot in Ubuntu, is where the bootloader loads the kernel, the kernel is compressed and named as vmlinuz, if you want to check your kernel: $ uname -a There might be more than one kernel, in case one kernel breaks. To configure and customize our own kernel we have to download it separetely. To know [what is each file in /boot](https://www.linuxquestions.org/questions/linux-newbie-8/%5Bboot%5D-what-do-those-files-do-828407/) . The drivers \(called as modules in Kernel\), which are .c functions that makes interface with the hardware \(CPU and so on\) are located in the /lib/modules folder in Ubuntu.
 
 By configuring the kernel using libncurses5-dev \(which is a text based GUI\) we can easily setup our kernel the way we want, for instance: I want to enable Windows file type system to our kernel, then we can make the change on it and we select if we want to ocnfig the knowledge to be loaded in the kernel only when needed \(M, as module\) or always \(\*\)..
 
@@ -54,9 +55,9 @@ When an app's component is activated a process is started. Important to know is 
 
 In order to components to communicate with each other, they do not use the traditional socket mechanism, but what is called as _binder_, which is a in-kernel binder mechanism, accessible through _/dev/binder._ But normal Android developers don't use the binder directly, they use the Android's Interface Definition Language \(IDL\). __
 
-\_\_
+### SDK and NDK
 
-Development: NDK and SDK. Native Development Kit, which stands for the C -&gt; Java layer programming. When we want to add new functionality with new hardware then we have to use the NDK. Usually what happens is the programming in C and then when compiling the C code, we target the processor that we want to use \(arm64, for instance\) and then a .so Shared Object will be created, which basically has all functionalities from the c function embedded in a .so file along with the header file, making the code public and available to interface with Java, for example. Since the Android system already communicates properly with the chip, so the Java layer will communicate seamless with the compiled .so. 
+Development: NDK and SDK. Native Development Kit, which stands for the C -&gt; Java layer programming. When we want to add new functionality with new hardware then we have to use the NDK. Usually what happens is the programming in C and then when compiling the C code, we target the processor that we want to use \(arm64, for instance\) and then a .so Shared Object will be created, which basically has all functionalities from the c function embedded in a .so file along with the header file, making the code public and available to interface with Java, for example. Since the Android system already communicates properly with the chip, so the Java layer will communicate seamless with the compiled .so. For the supported processors, one has to [check the Android ABIs](https://developer.android.com/ndk/guides/abis).
 
 Think about it: when we rewrite the kernel for a new purpose/ new android, we have to rewrite the SDK as well.
 
