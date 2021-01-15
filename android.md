@@ -13,6 +13,12 @@ description: Personal notes about Embedded Android.
 * Dalvik = custom build VM for running Android so it doesn't use proprietary material from Oracle \(Java\)
 * Apache Harmony = instead of the official class library, it's a reimplementation of the class lib.
 
+### Linux Kernel
+
+Na pasta /boot do linux, é onde o bootloader carrega o kernel. \(vmlinuz\) $ uname -a. Pode haver mais de um kernel, caso um quebre, escolhemos outro que funcione. Lembrando que esse kernel é compressed, então não temos acesso a ele. Para acessar e ver como configurar o kernel, baixamos do site. To know [what is each file in /boot](https://www.linuxquestions.org/questions/linux-newbie-8/%5Bboot%5D-what-do-those-files-do-828407/) . The drivers \(called as modules in Kernel\), which are .c functions that makes interface with the hardware \(CPU and so on\) are located in the /lib/modules folder in Ubuntu.
+
+By configuring the kernel using libncurses5-dev \(which is a text based GUI\) we can easily setup our kernel the way we want, for instance: I want to enable Windows file type system to our kernel, then we can make the change on it and we select if we want to ocnfig the knowledge to be loaded in the kernel only when needed \(M, as module\) or always \(\*\)..
+
 ### Android App Developer's View
 
 The entire Android behavior is predicted on low-memory conditions. Concepts that are important to understand, even though i'm focused on embedded systems. 
