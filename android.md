@@ -56,5 +56,11 @@ In order to components to communicate with each other, they do not use the tradi
 
 \_\_
 
+Development: NDK and SDK. Native Development Kit, which stands for the C -&gt; Java layer programming. When we want to add new functionality with new hardware then we have to use the NDK. Usually what happens is the programming in C and then when compiling the C code, we target the processor that we want to use \(arm64, for instance\) and then a .so Shared Object will be created, which basically has all functionalities from the c function embedded in a .so file along with the header file, making the code public and available to interface with Java, for example. Since the Android system already communicates properly with the chip, so the Java layer will communicate seamless with the compiled .so. 
+
+Think about it: when we rewrite the kernel for a new purpose/ new android, we have to rewrite the SDK as well.
+
+\_\_
+
 
 
