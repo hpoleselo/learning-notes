@@ -13,6 +13,7 @@ description: Personal notes about Embedded Android.
 * Dalvik = custom build VM for running Android so it doesn't use proprietary material from Oracle \(Java\)
 * Apache Harmony = instead of the official class library, it's a reimplementation of the class lib.
 * ABI = Application Binary Interface, which has the CPU instructions sets, endiannes of memory stores and loads at runtime \(Android is little-endian\), format of executable binaries \(Android uses ELF\)
+* UID = User Identifier, used kernel for hierarchy access control. In Android each app gets its UID, as if each app would be a different user.
 
 ### Linux Kernel
 
@@ -55,9 +56,13 @@ When an app's component is activated a process is started. Important to know is 
 
 In order to components to communicate with each other, they do not use the traditional socket mechanism, but what is called as _binder_, which is a in-kernel binder mechanism, accessible through _/dev/binder._ But normal Android developers don't use the binder directly, they use the Android's Interface Definition Language \(IDL\). __
 
+#### _- Security and Permissions_
+
+As said in UID acronym, each app gets an UID. The "users"/apps can access other user's data only if granted \(hence iPhone, Android\) structure to ask if they can access your contact list or so. On the other hand, some apps can have the static declaration of access grant in the manifest file, like acessing the camera, location, internet \(sockets\)...
+
 ### SDK and NDK
 
-Development: NDK and SDK. Native Development Kit, which stands for the C -&gt; Java layer programming. When we want to add new functionality with new hardware then we have to use the NDK. Usually what happens is the programming in C and then when compiling the C code, we target the processor that we want to use \(arm64, for instance\) and then a .so Shared Object will be created, which basically has all functionalities from the c function embedded in a .so file along with the header file, making the code public and available to interface with Java, for example. Since the Android system already communicates properly with the chip, so the Java layer will communicate seamless with the compiled .so. For the supported processors, one has to [check the Android ABIs](https://developer.android.com/ndk/guides/abis).
+Development: NDK and SDK. Native Development Kit, which CANNOT be confused to be an unlimited Development Kit, it is used mostly for graphics perfomance \(like games: Angry Birds, for instance\). But it goes indeed one layer down from the Java environment, here we can AS WELL program in C to interface with embedded systems, but it's not the focus, it still has its limitations. C -&gt; Java layer programming. When we want to add new functionality with new hardware then we have to use the NDK. Usually what happens is the programming in C and then when compiling the C code, we target the processor that we want to use \(arm64, for instance\) and then a .so Shared Object will be created, which basically has all functionalities from the c function embedded in a .so file along with the header file, making the code public and available to interface with Java, for example. Since the Android system already communicates properly with the chip, so the Java layer will communicate seamless with the compiled .so. For the supported processors, one has to [check the Android ABIs](https://developer.android.com/ndk/guides/abis).
 
 Think about it: when we rewrite the kernel for a new purpose/ new android, we have to rewrite the SDK as well.
 
