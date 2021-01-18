@@ -71,7 +71,7 @@ Features/drivers that have been added do the Linux Kernel to androidize \(import
 
 * Wakelock: functionality that prevents the system going to low-power mode, useful because different from computers, smartphones need to be in an active state.
 * Low-Memory Killer: kicks in before the OOM mechanism, the OOM only kicks in really when it's out of memory, but beforehand, Android deals with everything.
-* Binder: remembering this is fundamental for components to talk with each other \(RPC\) in the DevApp. In the Linux philosophy if you want to add a new service, you would need to to implement a new daemon \(process\), with binder we can add remotely invocable objects, meaning we can implement the remote object in any desired language and share the same process space as other services.
+* Binder: remembering this is fundamental for components \(more specific: services\) to talk with each other \(RPC\) in the DevApp, which allows in the end apps to talk the System Server, hence what is used to make apps talk with each other. In the Linux philosophy if you want to add a new service, you would need to to implement a new daemon \(process\), with binder we can add remotely invocable objects, meaning we can implement the remote object in any desired language and share the same process space as other services. **Important to say that services used by System Server is not the same service by apps through the service component model, so to disguinsh both we say: service component and service. Services run with system privileges and live from boot to reboot, while service component are life-cycled components associated with the app and their app privileges. But binder interacts with both of them.** 
 
 \_\_
 
