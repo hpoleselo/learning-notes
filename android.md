@@ -41,19 +41,19 @@ Types of components:
 
 Allows components to interact. Is a passive object, what matters for the interaction is actually the dispatching \(and its contents\) and the mechanism to dispatch it \(along with system built-in rules etc\). _Example of system rule: intents are tied to the type of the component they are sent to, intent sent by a service can be only received by a service, not by a broadcaster or activity._ 
 
-#### - Component Lifecycle
+#### _- Component Lifecycle_
 
 Switching between components \(task\) sometimes can lead to the memory to be full and we have to manage the stack of components, so we have to take down a component so another one that the user is interested can be opened up, but when the user clicks on the taken down component, the previous state \(context\) should be saved as if he never closed it, to make this behaviour possible we use component lifecycle, which is basically callbacks for each component.
 
-#### - Manifest
+#### _- Manifest_
 
 The main entry point of an app. Inform the system about the app's components, minimum API level required, HW requirements. It's an XML file \(like in ROS for ROS packages\) and resides on the top of the directory sources. Manifest \(components\) is statically declared \(at build time\), while broadcast receiver can be declared at runtime
 
-#### - Processes and Threads
+#### _- Processes and Threads_
 
 When an app's component is activated a process is started. Important to know is that more than one component is run within a single linux proccess, so if we make a long blocking operation on a standard component, we'll be running probably other components because the process is gonna run the other components, so in this case is better to use a Thread for it. \(low-memory conditions mindset\)
 
-#### - Remote Procedure Call \(RPC\)
+#### _- Remote Procedure Call \(RPC\)_
 
 In order to components to communicate with each other, they do not use the traditional socket mechanism, but what is called as _binder_, which is a in-kernel binder mechanism, accessible through _/dev/binder._ But normal Android developers don't use the binder directly, they use the Android's Interface Definition Language \(IDL\). __
 
@@ -67,10 +67,11 @@ Development: NDK and SDK. Native Development Kit, which CANNOT be confused to be
 
 Think about it: when we rewrite the kernel for a new purpose/ new android, we have to rewrite the SDK as well.
 
-Features that have been added do the Linux Kernel to androidize: 
+Features/drivers that have been added do the Linux Kernel to androidize \(important to say that those drivers \[at the time of writing of the book 2012 or 2013 maybe\] are located in the `drivers/staging/android`, because they have to be mature in order to be merged on the original kernel tree `drivers` \): 
 
 * Wakelock: functionality that prevents the system going to low-power mode, useful because different from computers, smartphones need to be in an active state.
-* Low-Memory Killer: kicks in before the OOM mechanism 
+* Low-Memory Killer: kicks in before the OOM mechanism, the OOM only kicks in really when it's out of memory, but beforehand, Android deals with everything.
+* Binder: remembering this is fundamental for components to talk with each other \(RPC\) in the DevApp. In the Linux philosophy if you want to add a new service, you would need to to implement a new daemon \(process\), with binder we can add remotely invocable objects, meaning we can implement the remote object in any desired language and share the same process space as other services.
 
 \_\_
 
