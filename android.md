@@ -18,6 +18,7 @@ description: Personal notes about Embedded Android.
 * IPC = Inter-Process Comunication
 * RTC = Real-Time Clock
 * HRT = High-Resolution Timers
+* Socket = allows communication between two different process on the same or different machines, usually when speak about sockets we think about internet, i.e: stream sockets, which use TCP \(data is guaranteed to be delivered\) and datagram sockets, which uses UDP \(data isn't guaranteed to be delivered\).
 
 ### Linux Kernel
 
@@ -50,7 +51,7 @@ Switching between components \(task\) sometimes can lead to the memory to be ful
 
 #### _- Manifest_
 
-The main entry point of an app. Inform the system about the app's components, minimum API level required, HW requirements. It's an XML file \(like in ROS for ROS packages\) and resides on the top of the directory sources. Manifest \(components\) is statically declared \(at build time\), while broadcast receiver can be declared at runtime
+The main entry point of an app. Inform the system about the app's components, minimum API level required, HW requirements. It's an XML file \(like in ROS for ROS packages\) and resides on the top of the directory sources. Manifest \(components\) is statically declared \(at build time\), while broadcast receiver can be declared at runtime. _One good example of that is a bluetooth connection, which is estabilished at runtime, although we have to give the permissions about the bluetooth before the application starts._
 
 #### _- Processes and Threads_
 
@@ -76,8 +77,9 @@ Features/drivers that have been added do the Linux Kernel to androidize \(import
 * Low-Memory Killer: kicks in before the OOM mechanism, the OOM only kicks in really when it's out of memory, but beforehand, Android deals with everything.
 * Binder: remembering this is fundamental for components \(more specific: services\) to talk with each other \(RPC\) in the DevApp, which allows in the end apps to talk the System Server, hence what is used to make apps talk with each other. In the Linux philosophy if you want to add a new service, you would need to to implement a new daemon \(process\), with binder we can add remotely invocable objects, meaning we can implement the remote object in any desired language and share the same process space as other services. **Important to say that services used by System Server is not the same service by apps through the service component model, so to disguinsh both we say: service component and service. Services run with system privileges and live from boot to reboot, while service component are life-cycled components associated with the app and their app privileges. But binder interacts with both of them.** 
 * Alarm: depends on RTC and HTC. When using HRT, the system cannot be in suspended mode. While with RTC could be used \(hence, the alarm\) even when the system is suspended. Android system makes use of the best of both worlds, by default using HRT to provide alarm for its users, if the system is about to suspend, it switches to RTC at the appropriate time. The alarm driver makes use of wakelock mechanism whenever needed.
-* Logger: essential component for any Linux system, being able to analyze errors and warnings in real time or postmortem. `dmesg` is one of the logging system and the system logs, which are found in the `/var/log` directory. The kernel's log contains messages printed out by `printk()` made in kernel and from the drivers. From what i understood, Android uses the logger the way it is but customizes its own logging mechanisms, which differs a lot from the syslog standard way. _No task-switch or file-writes are required for logging, instead it uses a circular buffer in RAM where it logs every incoming event and returns immediately back to the caller. Note: standard syslog sends messages through sockets and generates a task switch, using files to store its information_ 
-* 
+* Logger: essential component for any Linux system, being able to analyze errors and warnings in real time or postmortem. `dmesg` is one of the logging system and the system logs, which are found in the `/var/log` directory. The kernel's log contains messages printed out by `printk()` made in kernel and from the drivers. From what i understood, Android uses the logger the way it is but customizes its own logging mechanisms, which differs a lot from the syslog standard way. _No task-switch or file-writes are required for logging, instead it uses a circular buffer in RAM where it logs every incoming event and returns immediately back to the caller. Note: standard syslog sends messages through sockets and generates a task switch, using files to store its information. **It's crucial for mobile devices to have a log that doesn't grow indefinitely \(because it takes too much memory\), moreover those systems usually rely on SSDs, which have a limited number of erase cycles, so avoiding superfluous writing is crucial, that's why the ring buffer works like a charm.**_
+* Paranoid Networking: in Linux all processes are allowed to create sockets to communicate with the network, but since Android's security model, an app's network access has to be controlled, therefore there's an option for the process if it belongs to a certain group/with certain capabilities, this can be applied to IPv4, Ipv6 and Bluetooth.
+
 \_\_
 
 
