@@ -15,6 +15,9 @@ description: Personal notes about Embedded Android.
 * ABI = Application Binary Interface, which has the CPU instructions sets, endiannes of memory stores and loads at runtime \(Android is little-endian\), format of executable binaries \(Android uses ELF\)
 * UID = User Identifier, used kernel for hierarchy access control. In Android each app gets its UID, as if each app would be a different user.
 * OOM = undesired state of a computer when no additional memory can be allocated for use by programs or the OS.
+* IPC = Inter-Process Comunication
+* RTC = Real-Time Clock
+* HRT = High-Resolution Timers
 
 ### Linux Kernel
 
@@ -72,6 +75,7 @@ Features/drivers that have been added do the Linux Kernel to androidize \(import
 * Wakelock: functionality that prevents the system going to low-power mode, useful because different from computers, smartphones need to be in an active state.
 * Low-Memory Killer: kicks in before the OOM mechanism, the OOM only kicks in really when it's out of memory, but beforehand, Android deals with everything.
 * Binder: remembering this is fundamental for components \(more specific: services\) to talk with each other \(RPC\) in the DevApp, which allows in the end apps to talk the System Server, hence what is used to make apps talk with each other. In the Linux philosophy if you want to add a new service, you would need to to implement a new daemon \(process\), with binder we can add remotely invocable objects, meaning we can implement the remote object in any desired language and share the same process space as other services. **Important to say that services used by System Server is not the same service by apps through the service component model, so to disguinsh both we say: service component and service. Services run with system privileges and live from boot to reboot, while service component are life-cycled components associated with the app and their app privileges. But binder interacts with both of them.** 
+* Alarm: depends on RTC and HTC. When using HTC, the system cannot be in suspended mode. While with RTC could be used \(hence, the alarm\) even when the system is suspended. Android system makes use of the best of both worlds, by default using HRT to provide alarm for its users, if the system is about to suspend, it switches to RTC at the appropriate time. The alarm driver makes use of wakelock mechanism whenever needed.
 
 \_\_
 
