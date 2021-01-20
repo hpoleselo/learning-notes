@@ -80,7 +80,27 @@ Features/drivers that have been added do the Linux Kernel to androidize \(import
 * Logger: essential component for any Linux system, being able to analyze errors and warnings in real time or postmortem. `dmesg` is one of the logging system and the system logs, which are found in the `/var/log` directory. The kernel's log contains messages printed out by `printk()` made in kernel and from the drivers. From what i understood, Android uses the logger the way it is but customizes its own logging mechanisms, which differs a lot from the syslog standard way. _No task-switch or file-writes are required for logging, instead it uses a circular buffer in RAM where it logs every incoming event and returns immediately back to the caller. Note: standard syslog sends messages through sockets and generates a task switch, using files to store its information. **It's crucial for mobile devices to have a log that doesn't grow indefinitely \(because it takes too much memory\), moreover those systems usually rely on SSDs, which have a limited number of erase cycles, so avoiding superfluous writing is crucial, that's why the ring buffer works like a charm.**_
 * Paranoid Networking: in Linux all processes are allowed to create sockets to communicate with the network, but since Android's security model, an app's network access has to be controlled, therefore there's an option for the process if it belongs to a certain group/with certain capabilities, this can be applied to IPv4, Ipv6 and Bluetooth.
 
-\_\_
+### Hardware Support
+
+Android's Hardware Abstraction Layer:
+
+![](.gitbook/assets/image.png)
+
+Although android is built on the kernel's hardware abstractions and capabilities \(drivers, as we've seen above\), its subsystems and libraries doesn't rely on the standard /dev entities, instead Android relies on shared libraries provided by manufactures to interact with the hardware \(HAL\). _As seen on the figure above, the Android still relies on the drivers from kernel that we've spoken, but the interfacing with the hardware is done through the shared libraries._ 
+
+### Native User Space
+
+### AOSP
+
+Remembering the AOSP is built on the Linux kernel, so it's a layer on top of it before interfacing with the Java layer. Maintained in Git, we use the tool repo to fetch and manage AOSP. repo init, repo sync, repo fetch
+
+There's a directory called /devices which is going to contain all the supported devices by AOSP, this is where the vendor put its own developed part, the rest of the tree is the same for everyone.
+
+Hardware: HAL 
+
+Packages: basically the main and native apps from Android: E-mail, Calculator and so on... 
+
+System/systemcore: forms the basis of the embedded linux system where the Android is being built \(there you find the adb, init, liblog, logcat,  shell\)
 
 
 
