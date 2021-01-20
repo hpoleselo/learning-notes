@@ -7,7 +7,7 @@ description: Personal notes about Embedded Android.
 ### Acronyms/Terms:
 
 * HAL = Hardware Abstraction Layer
-* AOSP = Android Open Source Project = Android Platform
+* AOSP = Android Open Source Project = Android Platform, which runs on the linux kernel.
 * Android compatible Linux Kernel
 * SoC = System On A Chip
 * Dalvik = custom build VM for running Android so it doesn't use proprietary material from Oracle \(Java\)
@@ -24,7 +24,7 @@ description: Personal notes about Embedded Android.
 
 On the folder /boot in Ubuntu, is where the bootloader loads the kernel, the kernel is compressed and named as vmlinuz, if you want to check your kernel: $ uname -a There might be more than one kernel, in case one kernel breaks. To configure and customize our own kernel we have to download it separetely. To know [what is each file in /boot](https://www.linuxquestions.org/questions/linux-newbie-8/%5Bboot%5D-what-do-those-files-do-828407/) . The drivers \(called as modules in Kernel\), which are .c functions that makes interface with the hardware \(CPU and so on\) are located in the /lib/modules folder in Ubuntu.
 
-By configuring the kernel using libncurses5-dev \(which is a text based GUI\) we can easily setup our kernel the way we want, for instance: I want to enable Windows file type system to our kernel, then we can make the change on it and we select if we want to ocnfig the knowledge to be loaded in the kernel only when needed \(M, as module\) or always \(\*\)..
+By configuring the kernel using libncurses5-dev \(which is a text based GUI\) we can easily setup our kernel the way we want, for instance: I want to enable Windows file type system to our kernel, then we can make the change on it and we select if we want to configure the knowledge to be loaded in the kernel only when needed \(M, as module\) or always \(\*\)..
 
 ### Android App Developer's View
 
@@ -36,7 +36,7 @@ There's no main\(\) function in Android apps, applications consist of components
 
 Types of components:
 
-* Activities: it's like a web browser tab window, but in this case activities can't be resized/maximized/minimized, they always take the entire space, using the back button to navitage throug them. One activity can be displayed as an icon on the Android homescreen. A stack of activities is called a task.
+* Activities: it's like a web browser tab window, but in this case activities can't be resized/maximized/minimized, they always take the entire space, using the back button to navigate through them. One activity can be displayed as an icon on the Android homescreen. A stack of activities is called a task.
 * Services: are like daemons in Unix \(background process\). Service is activated when a component requests it.
 * Broadcast receiver: interrupt handlers or like trigger event, sensitive to a specific matter.
 * Content provider: database for the app. Most content providers rely on SQLite, which is included in Android.
@@ -47,7 +47,7 @@ Allows components to interact. Is a passive object, what matters for the interac
 
 #### _- Component Lifecycle_
 
-Switching between components \(task\) sometimes can lead to the memory to be full and we have to manage the stack of components, so we have to take down a component so another one that the user is interested can be opened up, but when the user clicks on the taken down component, the previous state \(context\) should be saved as if he never closed it, to make this behaviour possible we use component lifecycle, which is basically callbacks for each component.
+Switching between components \(task\) sometimes can lead to the memory to be full and we have to manage the stack of components, so we have to take down a component so another one that the user is interested can be opened up, but when the user clicks on the taken down component, the previous state \(context\) should be saved as if he never closed it, to make this behavior possible we use component lifecycle, which is basically callbacks for each component.
 
 #### _- Manifest_
 
@@ -63,11 +63,11 @@ In order to components to communicate with each other, they do not use the tradi
 
 #### _- Security and Permissions_
 
-As said in UID acronym, each app gets an UID. The "users"/apps can access other user's data only if granted \(hence iPhone, Android\) structure to ask if they can access your contact list or so. On the other hand, some apps can have the static declaration of access grant in the manifest file, like acessing the camera, location, internet \(sockets\)...
+As said in UID acronym, each app gets an UID. The "users"/apps can access other user's data only if granted \(hence iPhone, Android\) structure to ask if they can access your contact list or so. On the other hand, some apps can have the static declaration of access grant in the manifest file, like accessing the camera, location, internet \(sockets\)...
 
 ### SDK and NDK
 
-Development: NDK and SDK. Native Development Kit, which CANNOT be confused to be an unlimited Development Kit, it is used mostly for graphics perfomance \(like games: Angry Birds, for instance\). But it goes indeed one layer down from the Java environment, here we can AS WELL program in C to interface with embedded systems, but it's not the focus, it still has its limitations. C -&gt; Java layer programming. When we want to add new functionality with new hardware then we have to use the NDK. Usually what happens is the programming in C and then when compiling the C code, we target the processor that we want to use \(arm64, for instance\) and then a .so Shared Object will be created, which basically has all functionalities from the c function embedded in a .so file along with the header file, making the code public and available to interface with Java, for example. Since the Android system already communicates properly with the chip, so the Java layer will communicate seamless with the compiled .so. For the supported processors, one has to [check the Android ABIs](https://developer.android.com/ndk/guides/abis).
+Development: NDK and SDK. Native Development Kit, which CANNOT be confused to be an unlimited Development Kit, it is used mostly for graphics performance \(like games: Angry Birds, for instance\). But it goes indeed one layer down from the Java environment, here we can AS WELL program in C to interface with embedded systems, but it's not the focus, it still has its limitations. C -&gt; Java layer programming. When we want to add new functionality with new hardware then we have to use the NDK. Usually what happens is the programming in C and then when compiling the C code, we target the processor that we want to use \(arm64, for instance\) and then a .so Shared Object will be created, which basically has all functionalities from the c function embedded in a .so file along with the header file, making the code public and available to interface with Java, for example. Since the Android system already communicates properly with the chip, so the Java layer will communicate seamless with the compiled .so. For the supported processors, one has to [check the Android ABIs](https://developer.android.com/ndk/guides/abis).
 
 Think about it: when we rewrite the kernel for a new purpose/ new android, we have to rewrite the SDK as well.
 
