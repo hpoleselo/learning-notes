@@ -19,6 +19,7 @@ description: Personal notes about Embedded Android.
 * RTC = Real-Time Clock
 * HRT = High-Resolution Timers
 * Socket = allows communication between two different process on the same or different machines, usually when speak about sockets we think about internet, i.e: stream sockets, which use TCP \(data is guaranteed to be delivered\) and datagram sockets, which uses UDP \(data isn't guaranteed to be delivered\).
+* FHS = File Hierarchy System, is the normal linux organization folder: /bin /boot /dev /etc...
 
 ### Linux Kernel
 
@@ -103,7 +104,7 @@ Although android is built on the kernel's hardware abstractions and capabilities
 
 Is a daemon process that runs from start until the computer has been shut off, hence is  the father of all other processes, which is way its PID \(Process Identifier\) is 1. Linux systems back then used to use the SystemV init process, which has moved to Upstart in Ubuntu and systemd in Debian and in embedded linux systems the init process that is used is the BusyBox. The kernel boot process on Android is the same as in linux, what changes is when the boot process finishes.
 
-This tweaking is made on the /init.rc and /init.&lt;device-name&gt;.rc, there one has a high degree of control over the system's startup behavior, it's possible to disable the Zygote process \(which inherits its name from the cell proces, the initial cell formed when a new organism is produced, i.e: handles the forking of each new application process.
+This tweaking is made on the /init.rc and /init.&lt;device-name&gt;.rc, there one has a high degree of control over the system's startup behavior, it's possible to disable the Zygote process \(which inherits its name from the cell proces, the initial cell formed when a new organism is produced, i.e: handles the forking of each new application process, so new applications are always forked from Zygote \(preloads Java classes, resourcers, starts System Server, opens sockets...\)
 
 ### Toolbox
 
