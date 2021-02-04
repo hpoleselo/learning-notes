@@ -3,4 +3,5 @@
 * [C](README.md)
 * [Android](android.md)
 * [Webpage \(React + IoT\)](webpage-react-+-iot.md)
+* [Linux](linux.md)
 
