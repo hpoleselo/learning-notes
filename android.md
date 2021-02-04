@@ -92,14 +92,26 @@ Although android is built on the kernel's hardware abstractions and capabilities
 
 ### Native User Space
 
-Filesystem layout: sinal de que é possível hostear Android lado a lado com uma distribuição Linux no mesmo sistema raiz de arquivos: pois os diretórios principais do android são /system e /data e que não emanam do Filesystem Hieracyh Standard \(bin, boot, dev...\):
+### Filesystem layout
+
+ sinal de que é possível hostear Android lado a lado com uma distribuição Linux no mesmo sistema raiz de arquivos: pois os diretórios principais do android são /system e /data e que não emanam do Filesystem Hieracyh Standard \(bin, boot, dev...\):
 
 * /system é gerado pelo build do AOSP \(imutável\), montado na read-only memo
 * /data é pra guardar dados gerados por apps ou instalados pelo usuario, at runtime \(read-write mode\)
 
+### Init
+
+Is a daemon process that runs from start until the computer has been shut off, hence is  the father of all other processes, which is way its PID \(Process Identifier\) is 1. Linux systems back then used to use the SystemV init process, which has moved to Upstart in Ubuntu and systemd in Debian and in embedded linux systems the init process that is used is the BusyBox. The kernel boot process on Android is the same as in linux, what changes is when the boot process finishes.
+
+This tweaking is made on the /init.rc and /init.&lt;device-name&gt;.rc, there one has a high degree of control over the system's startup behavior, it's possible to disable the Zygote process \(which inherits its name from the cell proces, the initial cell formed when a new organism is produced, i.e: handles the forking of each new application process.
+
+### Toolbox
+
 Toolbox \(BSD Licensed\), Busybox is unix tools unidas em um arquivo executável, importante pra sistemas embarcados que usam linux \(low memory resources\), embedded linux. temos todos os benefícios das ferramentas \(cd, cat, mkdir, grep, pwd, wget, ping...\), usado também no Alpine Linux \(usado pra Docker, com imagens menores\) e no init antes de realmente carregar todo o sistema operacional.
 
 A vantagem do BSD é que tem incentivo da comercialização, já o GPL não. Inclusive pode ser usado BSD dentro de codigo GPL, o reverso não.
+
+
 
 ### System Startup
 
