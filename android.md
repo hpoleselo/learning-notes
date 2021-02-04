@@ -26,7 +26,7 @@ On the folder /boot in Ubuntu, is where the bootloader loads the kernel, the ker
 
 By configuring the kernel using libncurses5-dev \(which is a text based GUI\) we can easily setup our kernel the way we want, for instance: I want to enable Windows file type system to our kernel, then we can make the change on it and we select if we want to configure the knowledge to be loaded in the kernel only when needed \(M, as module\) or always \(\*\)..
 
-### Android App Developer's View
+## Chapter 2: Android App Developer's View
 
 The entire Android behavior is predicted on low-memory conditions. Concepts that are important to understand, even though i'm focused on embedded systems. 
 
@@ -88,9 +88,24 @@ Android's Hardware Abstraction Layer:
 
 Although android is built on the kernel's hardware abstractions and capabilities \(drivers, as we've seen above\), its subsystems and libraries doesn't rely on the standard /dev entities, instead Android relies on shared libraries provided by manufactures to interact with the hardware \(HAL\). _As seen on the figure above, the Android still relies on the drivers from kernel that we've spoken, but the interfacing with the hardware is done through the shared libraries._ 
 
+
+
 ### Native User Space
 
-### AOSP
+Filesystem layout: sinal de que é possível hostear Android lado a lado com uma distribuição Linux no mesmo sistema raiz de arquivos: pois os diretórios principais do android são /system e /data e que não emanam do Filesystem Hieracyh Standard \(bin, boot, dev...\):
+
+* /system é gerado pelo build do AOSP \(imutável\), montado na read-only memo
+* /data é pra guardar dados gerados por apps ou instalados pelo usuario, at runtime \(read-write mode\)
+
+Toolbox \(BSD Licensed\), Busybox is unix tools unidas em um arquivo executável, importante pra sistemas embarcados que usam linux \(low memory resources\), embedded linux. temos todos os benefícios das ferramentas \(cd, cat, mkdir, grep, pwd, wget, ping...\), usado também no Alpine Linux \(usado pra Docker, com imagens menores\) e no init antes de realmente carregar todo o sistema operacional.
+
+A vantagem do BSD é que tem incentivo da comercialização, já o GPL não. Inclusive pode ser usado BSD dentro de codigo GPL, o reverso não.
+
+### System Startup
+
+CPU fetches a suas instruções iniciais em um endereço fixo hardcoded, tal endereço aponta pra um chip que tem o bootloader, o bootloader inicializa a RAM, coloca o hardware em um estado quiescente, loada o kernel and o disco de RAM e depois vai pro kernel. \(tenta\)
+
+## Chapter 3: AOSP
 
 Remembering the AOSP is built on the Linux kernel, so it's a layer on top of it before interfacing with the Java layer. Maintained in Git, we use the tool repo to fetch and manage AOSP. repo init, repo sync, repo fetch
 
@@ -101,6 +116,8 @@ Hardware: HAL
 Packages: basically the main and native apps from Android: E-mail, Calculator and so on... 
 
 System/systemcore: forms the basis of the embedded linux system where the Android is being built \(there you find the adb, init, liblog, logcat,  shell\)
+
+
 
 
 
