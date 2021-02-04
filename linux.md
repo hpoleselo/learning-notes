@@ -20,7 +20,7 @@ Location of the init programs:
 
 `File: /proc/1/exe -> /lib/systemd/systemd`
 
-In this case, systemd. Some say that systemd is the future for some reason. In fact this command was issued on an Ubuntu 18.04. The reason why one can stumble with this matter is because from Ubuntu 16.04 to 18.04 the location of etc/init.d/rc changes because of systemd.
+In this case, systemd. Some say that systemd is the future for some reason. In fact this command was issued on an Ubuntu 18.04. The reason why one can stumble with this matter is because from Ubuntu 16.04 to 18.04 the location of `/etc/init.d/rc` \(which is deprecated, furthermore, forget about rc.local from what it looks like\) changes because of systemd.
 
 
 
