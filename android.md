@@ -20,6 +20,8 @@ description: Personal notes about Embedded Android.
 * HRT = High-Resolution Timers
 * Socket = allows communication between two different process on the same or different machines, usually when speak about sockets we think about internet, i.e: stream sockets, which use TCP \(data is guaranteed to be delivered\) and datagram sockets, which uses UDP \(data isn't guaranteed to be delivered\).
 * FHS = File Hierarchy System, is the normal linux organization folder: /bin /boot /dev /etc...
+* JRE = Java Runtime Environment
+* JDK = Java Development Kit, in other words, Java SE \(Java Standard Edition\) can be implemented either in OracleJDK or OpenJDK, OracleJDK offers more stability and LTS \(every three years\), while OpenJDK is six-monthly released. Note that Ubuntu, Fedore and Red Hat provide OpenJDK as the standard Java SE implementation, for instance. Android relies on it and when developing apps for it, mainly when using Fedora/Ubuntu, which tends to use the native OpenJDK, you will get errors from simple builds, meaning it's required to use OracleJDK.
 
 ### Linux Kernel
 
