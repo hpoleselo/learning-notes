@@ -130,6 +130,12 @@ Packages: basically the main and native apps from Android: E-mail, Calculator an
 
 System/systemcore: forms the basis of the embedded linux system where the Android is being built \(there you find the adb, init, liblog, logcat,  shell\)
 
+![](.gitbook/assets/image%20%281%29.png)
+
+![](.gitbook/assets/image%20%282%29.png)
+
+![AOSP with directories view of the Android Architecture](.gitbook/assets/image%20%283%29.png)
+
 
 
 
