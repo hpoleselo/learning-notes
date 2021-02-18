@@ -32,5 +32,7 @@ Note that two enum names can have the same value
 * Underscore before variable =
 * temp = is a variable that you just use to store some value to do temporary calculations or so, it seems that it can be used multiple times in a row? 
 
-\`\`
+Header Files: Using header files is a GOOD practice to do. Just used in the compiling proccess in order to the compiler to know which functions are exported by a module, after this process the header files are not needed anymore. Header files really come into picture when we're using a module that we developed on another project, because then we can just include our header file to use the functions we declared.
+
+[https://dev.to/narasimha1997/understanding-c-c-build-system-by-building-a-simple-project-part-1-4fff](https://dev.to/narasimha1997/understanding-c-c-build-system-by-building-a-simple-project-part-1-4fff)
 
